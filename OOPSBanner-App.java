@@ -1,58 +1,80 @@
+import java.util.*;
+
 public class OOPSBanner-App {
 
-    public static String[] getOPattern() {
-        return new String[]{
-            "   ***  ",
-            " **   **",
-            "**     **",
-            "**     **",
-            "**     **",
-            " **   ** ",
-            "   ***  "
-        };
+    static class CharacterPatternMap {
+        private char character;
+        private String[] pattern;
+
+        public CharacterPatternMap(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
+        }
+
+        public char getCharacter() {
+            return character;
+        }
+
+        public String[] getPattern() {
+            return pattern;
+        }
     }
 
-    public static String[] getPPattern() {
-        return new String[]{
-            " ***** ",
-            " **  **",
-            " **  **",
-            " ***** ",
-            " **    ",
-            " **    ",
-            " **    "
-        };
+    public static CharacterPatternMap[] createCharacterPatterns() {
+
+        CharacterPatternMap[] map = new CharacterPatternMap[4];
+
+        map[0] = new CharacterPatternMap('O', new String[]{
+                " *** ",
+                "*   *",
+                "*   *",
+                "*   *",
+                " *** "
+        });
+
+        map[1] = new CharacterPatternMap('P', new String[]{
+                "**** ",
+                "*   *",
+                "**** ",
+                "*    ",
+                "*    "
+        });
+
+        map[2] = new CharacterPatternMap('P', new String[]{
+                "**** ",
+                "*   *",
+                "**** ",
+                "*    ",
+                "*    "
+        });
+
+        map[3] = new CharacterPatternMap('S', new String[]{
+                " ****",
+                "*    ",
+                " *** ",
+                "    *",
+                "**** "
+        });
+
+        return map;
     }
 
-    public static String[] getSPattern() {
-        return new String[]{
-            " ***** ",
-            " **    ",
-            " **    ",
-            " ***** ",
-            "    **",
-            "    **",
-            " ***** "
-        };
+    public static void displayBanner(CharacterPatternMap[] maps) {
+
+        int rows = maps[0].getPattern().length;
+
+        for (int i = 0; i < rows; i++) {
+            for (CharacterPatternMap map : maps) {
+                System.out.print(map.getPattern()[i] + "  ");
+            }
+            System.out.println();
+        }
     }
 
     public static void main(String[] args) {
 
-        String[] o1 = getOPattern();
-        String[] o2 = getOPattern();
-        String[] p = getPPattern();
-        String[] s = getSPattern();
+        CharacterPatternMap[] maps = createCharacterPatterns();
 
-        int i = 0;
-
-        for (String line : o1) {
-            System.out.println(String.join(" ",
-                    o1[i],
-                    o2[i],
-                    p[i],
-                    s[i]
-            ));
-            i++;
-        }
+        displayBanner(maps);
     }
 }
